@@ -3,13 +3,31 @@ package demo08;
 import java.util.Arrays;
 
 /**
- * a,b,c三个数之和为1000, a^2 + b^2 = c^2, 求 a, b, c.
+ * method1: a,b,c三个数之和为1000, a^2 + b^2 = c^2, 求 a, b, c.
+ * sortMerge: 归并排序   sort: 数组合并
+ * SumOfCol: 最大子列和
  */
 public class Test {
     public static void main(String[] args) {
 
 //        method1();
-        sortMerge(new int[]{9, 1, 2, 11, 8, 3, 2, 7, 12, 3, 6, 9, 4, 5, 0});
+//        sortMerge(new int[]{9, 1, 2, 11, 8, 3, 2, 7, 12, 3, 6, 9, 4, 5, 0});
+        int max = SumOfCol(new int[]{1, 0, -2, 6, 3, -5, 7, 3, -1});
+        System.out.println(max);
+    }
+
+    private static int SumOfCol(int[] ints) {
+        int max = 0;
+        int sum = 0;
+        for (int i = 0; i < ints.length; i++) {
+            sum += ints[i];
+            if (max < sum) {
+                max = sum;
+            }
+            if (sum < 0)
+                sum = 0;
+        }
+        return max;
     }
 
     private static void method1() {

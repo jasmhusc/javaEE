@@ -10,13 +10,13 @@ public class FutureTaskDemo {
         //第一种方式
         ExecutorService executor = Executors.newCachedThreadPool();
         Task task = new Task();
-        FutureTask<Integer> futureTask = new FutureTask<Integer>(task);
+        FutureTask<Integer> futureTask = new FutureTask<>(task);
         executor.submit(futureTask);
         executor.shutdown();
 
         //第二种方式，注意这种方式和第一种方式效果是类似的，只不过一个使用的是ExecutorService，一个使用的是Thread
         /*Task task = new Task();
-        FutureTask<Integer> futureTask = new FutureTask<Integer>(task);
+        FutureTask<Integer> futureTask = new FutureTask<>(task);
         Thread thread = new Thread(futureTask);
         thread.start();*/
 
@@ -30,9 +30,7 @@ public class FutureTaskDemo {
 
         try {
             System.out.println("task运行结果" + futureTask.get());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 

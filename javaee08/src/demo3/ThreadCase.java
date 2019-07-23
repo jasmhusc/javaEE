@@ -29,7 +29,7 @@ public class ThreadCase {
         }
 //        System.out.println(num);   上面线程没有执行完，num就输出了，肯定有问题。
         try {
-            // 让上面10条线程跑完，在输出num，结果一定是0
+            // 让上面10条线程跑完，再输出num，结果一定是0
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();

@@ -4,6 +4,9 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * 多线程通信，1个锁对象Lock，多个监视器lock.newCondition()
+ */
 public class Demo1_ReenTrantLock {
 
     public static void main(String[] args) {

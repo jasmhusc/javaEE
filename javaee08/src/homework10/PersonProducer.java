@@ -16,18 +16,16 @@ public class PersonProducer extends Thread {
         while (true) {
             // 同步代码块加锁对象person
             synchronized (person) {
-                if (person.getFlag()) {
-                    try {
-                        person.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
                 person.setName("harden");
                 person.setGender(Gender.Mail);
                 person.setFlag(true);
                 System.out.println("生产： " + person);
                 person.notify();
+                try {
+                    person.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

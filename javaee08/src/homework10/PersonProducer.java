@@ -16,7 +16,7 @@ public class PersonProducer extends Thread {
         while (true) {
             // 同步代码块加锁对象person
             synchronized (person) {
-                if (person.getName() != null) {
+                if (person.getFlag()) {
                     try {
                         person.wait();
                     } catch (InterruptedException e) {
@@ -25,6 +25,7 @@ public class PersonProducer extends Thread {
                 }
                 person.setName("harden");
                 person.setGender(Gender.Mail);
+                person.setFlag(true);
                 System.out.println("生产： " + person);
                 person.notify();
             }

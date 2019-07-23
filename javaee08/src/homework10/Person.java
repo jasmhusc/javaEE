@@ -3,6 +3,7 @@ package homework10;
 public class Person {
     private String name;
     private Gender gender;
+    private boolean flag = false;
 
     public Person() {
     }
@@ -10,6 +11,14 @@ public class Person {
     public Person(String name, Gender gender) {
         this.name = name;
         this.gender = gender;
+    }
+
+    public boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
 
     public String getName() {

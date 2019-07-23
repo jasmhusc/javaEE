@@ -16,7 +16,7 @@ public class PersonConsumer extends Thread {
         while (true) {
             // 同步代码块加锁对象person
             synchronized (person) {
-                if (person.getGender() == null) {
+                if (!person.getFlag()) {
                     try {
                         person.wait();
                     } catch (InterruptedException e) {
@@ -24,8 +24,7 @@ public class PersonConsumer extends Thread {
                     }
                 }
                 System.out.println("消费：" + person);
-                person.setName(null);
-                person.setGender(null);
+                person.setFlag(false);
                 person.notify();
             }
         }

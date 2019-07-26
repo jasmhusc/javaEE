@@ -10,7 +10,6 @@ public class Demo4_ChangeableArgs {
         print(11, 22, 33, 44);
         System.out.println("-----------------");
         print();
-
     }                      // 有多个参数时，可变参数要放在最后
 
     private static void print(int... arr) {       // 可变参数其实是数组，和下面  int[] arr 类似，但更加强大
@@ -18,8 +17,6 @@ public class Demo4_ChangeableArgs {
 
             System.out.println(arr[i]);
         }
-
-
     }
 
 //	private static void print(int[] arr) {

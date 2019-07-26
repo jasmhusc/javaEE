@@ -14,7 +14,7 @@ public class Test2 {
         String line = sc.nextLine();
         char[] arr = line.toCharArray();
         sc.close();
-        // character类也和String一样，已经实现了  Comparable接口，并重写CompareTo方法，会去除重复，结果默认按照 字典排序
+        // character类也和String一样，已经实现了  Comparable接口，并重写CompareTo方法，会去除重复，结果默认按照字典排序
         TreeSet<Character> ch = new TreeSet<>(new Comparator<Character>() {
 
             @Override

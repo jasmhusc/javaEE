@@ -57,8 +57,9 @@ class CompareByLen implements Comparator<String> {
 
     @Override
     public int compare(String o1, String o2) {
-
+//      先按照字符串长度排序，再按照自然方式排序
         int num = o1.length() - o2.length();
         return num == 0 ? o1.compareTo(o2) : num;
+//        return 0; 只会存第一个字符串aaaaa，后面的都不会存
     }
 }

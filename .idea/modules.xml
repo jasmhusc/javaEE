@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/javaee01/javaee01.iml" filepath="$PROJECT_DIR$/javaee01/javaee01.iml" />
-      <module fileurl="file://$PROJECT_DIR$/javaee02/javaee02.iml" filepath="$PROJECT_DIR$/javaee02/javaee02.iml" />
-      <module fileurl="file://$PROJECT_DIR$/javaee03/javaee03.iml" filepath="$PROJECT_DIR$/javaee03/javaee03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javaee09/javaee09.iml" filepath="$PROJECT_DIR$/javaee09/javaee09.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javaee10/javaee10.iml" filepath="$PROJECT_DIR$/javaee10/javaee10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javaee11/javaee11.iml" filepath="$PROJECT_DIR$/javaee11/javaee11.iml" />
     </modules>
   </component>
 </project>

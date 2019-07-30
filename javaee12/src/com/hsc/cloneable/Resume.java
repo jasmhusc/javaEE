@@ -6,6 +6,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Resume个人简历，包含姓名，年龄，电话，公司，地址信息；
+ * 包含对信息进行基本更改，展示的操作；
+ * 用于测试浅克隆和深克隆的不同点，因此需要实现Cloneable和Serializable接口
+ */
 public class Resume implements Cloneable, Serializable {
 
     private static final long serialVersionUID = 1L;

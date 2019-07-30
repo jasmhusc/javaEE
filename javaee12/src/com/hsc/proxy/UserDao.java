@@ -2,7 +2,7 @@ package com.hsc.proxy;
 
 public interface UserDao {
 
-    public void delete();
+    void delete();
 
-    public int apply(int i);
+    int apply(int i);
 }

@@ -5,7 +5,7 @@ public class UserDaoImp implements UserDao {
     @Override
     public void delete() {
 
-        System.out.println("ɾ�����ݣ�");
+        System.out.println("删除成功！");
     }
 
     @Override

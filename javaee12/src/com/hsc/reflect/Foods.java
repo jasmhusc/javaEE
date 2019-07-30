@@ -9,11 +9,8 @@ public class Foods {
         num--;
     }
 
-    ;
-
     private void create() {
         num++;
     }
 
-    ;
 }

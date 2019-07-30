@@ -9,7 +9,6 @@ public class PhoneNum implements Serializable {
 
     public PhoneNum() {
         super();
-
     }
 
     public PhoneNum(String phone) {

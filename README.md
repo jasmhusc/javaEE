@@ -27,3 +27,6 @@ This project is about java advanced knowledge, i add notes of codes, examples an
 
 ### javaee09
 - File,递归，字节流，字符流
+
+### javaee10
+- 属性集，缓冲流、转换流、序列化流

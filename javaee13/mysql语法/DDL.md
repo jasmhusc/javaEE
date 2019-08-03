@@ -3,7 +3,7 @@
 ### 创建数据库
 
 - 直接创建数据库db1
-```CREATE DATABASE db1;```
+`CREATE DATABASE db1;`
 
 - 判断是否存在并创建数据库db2
 `CREATE DATABASE IF NOT EXISTS db2;`
@@ -35,11 +35,13 @@ SELECT DATABASE();
 
 ## DDL操作表
 - 创建student表包含id,name,birthday字段
-```CREATE TABLE student(
+```
+CREATE TABLE student(
 	id INT,
 	NAME VARCHAR(20),
 	birthday DATE
-);```
+);
+```
 
 ### 查看表:show,desc
 

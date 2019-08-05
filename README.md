@@ -30,3 +30,6 @@ This project is about java advanced knowledge, i add notes of codes, examples an
 
 ### javaee10
 - 属性集，缓冲流、转换流、序列化流
+
+### javaee11
+- Socket网络编程

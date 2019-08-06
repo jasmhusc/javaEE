@@ -33,3 +33,6 @@ This project is about java advanced knowledge, i add notes of codes, examples an
 
 ### javaee11
 - Socket网络编程
+
+### javaee12
+- 反射，注解，junit，动态代理

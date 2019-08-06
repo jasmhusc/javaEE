@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsc.dao.UserMapper">
+    <!--#{id}: 先使用?占位,再取出方法的id这个参数,放到这个位置
+            参数是基本数据类型,可以省略不配置, #{}里面可以随便写
+        -->
+    <select id="findUserById" resultType="user" parameterType="int">
+        SELECT * FROM user WHERE id=#{id};
+    </select>
+
+    <select id="findAllUsers" resultType="user">
+        SELECT * From user;
+    </select>
+
+    <select id="findUserLikeUserName" parameterType="String" resultType="user">
+        SELECT * FROM user WHERE username LIKE #{name};
+        <!-- %{}: 拼接字符串, {}里面只能写value,   %${value}% -->
+        <!--SELECT * FROM user WHERE username LIKE '%${value}%'; -->
+        <!--SELECT * FROM user WHERE username LIKE '%精%'; -->
+    </select>
+
+    <select id="findUserByBirthday" parameterType="String" resultType="user">
+        SELECT * FROM user WHERE birthday BETWEEN #{arg0} AND #{arg1};
+        <!--SELECT * FROM user WHERE birthday BETWEEN #{param1} AND #{param2};-->
+    </select>
+
+    <select id="findUserByBirthdayPro" parameterType="QueryVo" resultType="user">
+        SELECT * FROM user WHERE birthday BETWEEN #{start} AND #{end};
+    </select>
+
+    <select id="getCountBySex" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM user WHERE sex=#{gender};
+    </select>
+
+    <delete id="deleteUser">
+    DELETE FROM user WHERE id=#{id};
+</delete>
+
+    <!--insert: 表示添加数据-->
+    <!--<insert id="addUser" parameterType="user">
+            INSERT INTO user VALUES (NULL, #{username}, #{birthday}, #{sex}, #{address});
+
+            &lt;!&ndash; 得到添加的记录的主键
+                resultType: 主键的类型
+                keyColumn: 主键的字段名
+                keyProperty: 主键对应的属性名
+                order: 获取主键的时机,BEFORE在INSERT前, AFTER在INSERT后
+            &ndash;&gt;
+            <selectKey resultType="int" keyColumn="id" keyProperty="id" order="AFTER">
+                SELECT LAST_INSERT_ID();
+            </selectKey>
+        </insert>-->
+    <insert id="addUser" parameterType="user" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO user VALUES (null ,#{username},#{birthday},#{sex},#{address});
+        <!-- 让插入的user对象的id与数据库自增的键id保持同步和一致-->
+        <!--<selectKey keyColumn="id" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>-->
+    </insert>
+
+    <update id="updateUser" parameterType="user">
+        UPDATE user SET username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} WHERE id=#{id};
+    </update>
+    <!--对结果进行映射-->
+    <resultMap id="rm1" type="user">
+        <!--对查询结果字段和类中的成员变量进行映射-->
+        <!--id: 主键的映射
+        result: 普通字段的映射
+            column: 查询列名
+            property: 对象的成员变量名-->
+        <id column="id2" property="id"/>
+        <result column="生日" property="birthday"/>
+        <result column="name2" property="username"/>
+    </resultMap>
+    <!--查询结果的字段和类的成员变量不一样-->
+    <select id="findUserByIdRM" resultMap="rm1">
+        SELECT id id2,birthday 生日,username name2,sex,address FROM user WHERE id=#{id};
+    </select>
+</mapper>

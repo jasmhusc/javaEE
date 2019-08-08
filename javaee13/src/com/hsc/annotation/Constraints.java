@@ -16,7 +16,7 @@ public @interface Constraints {
     // 三种约束：主键，非空，唯一，自动增长
     boolean primaryKey() default false;
 
-    boolean allowNull() default false;
+    boolean notNull() default false;
 
     boolean unique() default false;
 

@@ -16,5 +16,5 @@ public @interface SQLInteger {
     String name() default "";
 
     // 约束（也是注解）
-    Constraints constrain() default @Constraints;
+    Constraints constraint() default @Constraints;
 }

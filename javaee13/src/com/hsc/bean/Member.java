@@ -12,18 +12,18 @@ import com.hsc.annotation.SQLString;
 @DBTable(name = "Member")
 public class Member {
     // id 主键约束，自动增长
-    @SQLInteger(name = "ID", constrain = @Constraints(primaryKey = true, autoIncrement = true))
+    @SQLInteger(name = "id", constraint = @Constraints(primaryKey = true, autoIncrement = true))
     private Integer id;
 
     // name 长度20
-    @SQLString(name = "NAME", value = 20)
+    @SQLString(name = "username", value = 20, constraint = @Constraints(notNull = true))
     private String name;
 
     // age
-    @SQLInteger(name = "AGE")
+    @SQLInteger(name = "age", constraint = @Constraints(notNull = true))
     private Integer age;
 
     // description 描述信息，长度100，允许空值
-    @SQLString(name = "DESCRIPTION", value = 100, constraint = @Constraints(allowNull = true))
+    @SQLString(value = 100)
     private String description;
 }

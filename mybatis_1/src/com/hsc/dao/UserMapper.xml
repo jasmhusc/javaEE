@@ -3,13 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace: 写接口的包名.类名-->
-<mapper namespace="com.hsc.dao.UserMapper">
+<mapper namespace="com.UserMapper">
     <!--
     查询数据使用selectSQL语句
     id:接口中的方法名
-    resultType: List<User>,我们只要写集合里面存储的类型User的类全名
+    resultType: List<User>，返回的结果类型，我们只要写集合里面存储的类型User的类全名
 -->
-    <select id="findAllUsers" resultType="com.hsc.entity.User">
+    <select id="findAllUsers" resultType="com.User">
         SELECT * FROM user;
     </select>
 </mapper>

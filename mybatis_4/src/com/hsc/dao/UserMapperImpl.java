@@ -20,6 +20,8 @@ public class UserMapperImpl implements UserMapper {
     @Override
     public User findUserById(int id) {
         User user = sqlSession.selectOne("com.hsc.dao.UserMapper.findUserById", id);
+        sqlSession.commit();
+        sqlSession.close();
         return user;
     }
 

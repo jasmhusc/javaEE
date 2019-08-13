@@ -45,3 +45,6 @@ This project is about java advanced knowledge, i add notes of codes, examples an
 
 ### javaee15
 - MySQL多表查询与事务
+
+### javaee16
+- JDBC链接池&JDBCTemplate

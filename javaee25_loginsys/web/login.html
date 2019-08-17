@@ -24,12 +24,19 @@
 			<div class="form-inline">
 	    		<label for="vcode">验证码：</label>
 	    		<input type="text" name="vcode" class="form-control" id="vcode" placeholder="验证码" style="width: 70px" maxlength="4"/>&nbsp;
-				<img src="" style="width: 90px; height: 30px; cursor: pointer;" title="看不清，点击刷新">
+				<img src="CheckCodeServlet" onclick="changeCheckCode(this);" style="width: 90px; height: 30px; cursor: pointer;" title="看不清，点击刷新">
 	    	</div>
 	    	<div style="text-align: center; padding-top: 20px;">
 		    	<input type="submit" value=" 登 录 " class="btn btn-primary"/>
 	    	</div>
 	    </form>
 	    </div>
+
+	<script>
+		function changeCheckCode(obj) {
+			// obj.src = "CheckCodeServlet";点击不会切换图片，这段代码不会执行，因为浏览器会缓存src的值
+			obj.src = "CheckCodeServlet?"+new Date().getTime();
+		}
+	</script>
   </body>
 </html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        function isIE() {
+            //获取当前浏览器相关信息
+            var explorer = window.navigator.userAgent.toLowerCase();
+            //判断是否是ie浏览器
+            if (explorer.indexOf("msie") >= 0 || explorer.indexOf("rv:11.0) like gecko") >= 0) {
+                return true;
+            } else {
+                false;
+            }
+        }
+
+        window.onload = function () {
+            if (isIE()) {
+                //在是IE浏览器的情况下，对中文请求参数编码
+                var str = document.getElementById("ww").href;
+                var str = encodeURI(str);
+                document.getElementById("ww").href = str;
+            }
+        };
+    </script>
+</head>
+<body>
+<a href="download?fileName=ff.jpg">ff.jpg</a>
+<a href="download?fileName=file.jpg">file.jpg</a>
+<a href="download?fileName=file.txt">file.txt</a>
+<!--IE浏览器get方式传递中文不会进行url编码，需要手动使用浏览器的url编码 -->
+<a id="ww" href="download?fileName=美女.jpg">美女.jpg</a>
+<a href="download?fileName=file.zip">file.zip</a>
+
+</body>
+</html>

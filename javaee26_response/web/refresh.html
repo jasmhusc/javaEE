@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script type="text/javascript">
+        //定义倒计时数字
+        var count = 3;
+        //当页面加载完成时调用
+        window.onload = function () {
+            //倒计时
+            tick();
+        }
+
+        //启动倒计时
+        function tick() {
+            //判断倒计时数字大于0继续进行倒计时操作
+            if (count > 0) {
+                //获得页面中显示倒计时的标签对象
+                var p = document.getElementById("one");
+                //页面显示倒计时数字,显示后数字减1
+                p.innerHTML = count--;
+                //设置定时在一秒后继续调用当前方法
+                window.setTimeout(tick, 1000);
+            }
+        }
+    </script>
+</head>
+<body>
+页面在<p id="one">3</p>秒后跳转...
+</body>
+</html>

@@ -48,3 +48,6 @@ This project is about java advanced knowledge, i add notes of codes, examples an
 
 ### javaee16
 - JDBC链接池&JDBCTemplate
+
+### mybatis1
+- mybatis框架搭建，环境配置

@@ -51,3 +51,6 @@ This project is about java advanced knowledge, i add notes of codes, examples an
 
 ### mybatis1
 - mybatis框架搭建，环境配置
+
+### mybatis2
+- mybatis框架理解，代理模式的应用，自定义mybatis框架

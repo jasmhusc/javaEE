@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsc.dao.UserMapper">
+    <!--使用where 标签和if 标签-->
+    <select id="findUserByUserNameAndSex" resultType="user" parameterType="QueryVo">
+        SELECT * FROM user
+        <where>
+            <!-- if 标签条件判断-->
+            <if test="username != null and username != ''">
+                username LIKE #{username}
+            </if>
+            <if test="sex != null &amp;&amp; sex != ''">
+                and sex = #{sex}
+            </if>
+        </where>
+    </select>
+    <!--update没有返回会值类型的配置,会拿这个SQL的执行影响的行数作为返回值-->
+    <update id="updateUser">
+        UPDATE user
+        <!--使用set标签，最后加上where语句-->
+        <set>
+            <if test="username != null and username != ''">
+                username=#{username},
+            </if>
+            <if test="birthday != null">
+                birthday=#{birthday},
+            </if>
+            <if test="sex != null and sex != ''">
+                sex=#{sex},
+            </if>
+            <if test="address != null and address != ''">
+                address=#{address}
+            </if>
+        </set>
+        where id=#{id};
+    </update>
+
+    <delete id="deleteUsersById" parameterType="list">
+        <!--DELETE FROM user WHERE id IN (2,3,5);-->
+        DELETE FROM user where id in
+        <!-- 语句拼接(2,3,5);
+        'collection: 要遍历的数组或集合(如果是数组写array,如果是List集合写list)
+            open: 在循环前要拼接的内容
+            close: 在循环后拼接的内容
+            separator: 每循环一次后要拼接的内容
+            item: 每次循环的变量名
+        -->
+        <foreach collection="array" open="(" close=");" separator="," item="num">
+            #{num}
+        </foreach>
+    </delete>
+
+    <sql id="sql2">
+        INSERT INTO user VALUES
+    </sql>
+    <insert id="addUsers">
+        <!-- insert into user (username, birthday, sex, address) values
+                ('张三', '1999-09-09', '男', '东莞'),
+                ('张三', '1999-09-09', '男', '东莞'),
+                ('张三', '1999-09-09', '男', '东莞');
+                ('张三', '1999-09-09', '男', '东莞') 每次循环要生成一行-->
+
+        <!-- INSERT INTO user (username, birthday, sex, address) VALUES -->
+        <!-- 在需要使用SQL的地方引入SQL -->
+        <include refid="sql2"/>
+        <!-- 遍历List集合，取出里面的每个User对象 -->
+        <foreach collection="list" item="user" close=";" separator=",">
+            (#{user.id} ,#{user.username},#{user.birthday},#{user.sex},#{user.address})
+        </foreach>
+    </insert>
+
+    <sql id="consql">
+        SELECT * FROM user
+    </sql>
+    <select id="findUsersByCondition" resultType="user" parameterType="Condition">
+        <include refid="consql"/>
+        <where>
+            <if test="name != null and name != ''">
+                username='%${name}%'
+            </if>
+            <if test="minDate != null">
+                <![CDATA[
+                and birthday >= #{minDate}
+                ]]>
+            </if>
+            <if test="maxDate != null">
+                <![CDATA[
+                and birthday <= #{maxDate}
+                ]]>
+            </if>
+        </where>
+    </select>
+</mapper>

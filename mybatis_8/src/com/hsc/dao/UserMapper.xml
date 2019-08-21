@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsc.dao.UserMapper">
+    <!--需要在接口的映射文件中添加<cache/>，这个Mapper里面所有的查询出的对象都会放到二级缓存中-->
+    <cache/>
+
+    <resultMap id="useMapOne" type="user">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="birthday" column="birthday"/>
+        <result property="sex" column="sex"/>
+        <result property="address" column="address"/>
+        <!--一对一建立连接，User中包含一个UserInfo类对象，名称为userInfo
+        property: 一对一对象的成员变量名
+        select: 要延迟执行的第二条SQL
+        column: 该字段会作为第二个SQL语句的参数-->
+        <association property="userInfo" javaType="UserInfo" column="id" fetchType="lazy" select="findUserInfoById"/>
+        <!--private List<OrderForm> orders;-->
+        <collection property="orders" select="findOrdersByUID" fetchType="lazy" javaType="List" column="id">
+            <id property="oid" column="oid"/>
+            <result property="userId" column="user_id"/>
+            <result property="number" column="number"/>
+            <result property="createTime" column="create_time"/>
+            <result property="note" column="note"/>
+        </collection>
+        <!--private List<Role> roles;-->
+        <collection property="roles" javaType="List" fetchType="lazy" select="findRolesByUserId" column="id">
+            <id property="roleId" column="role_id"/>
+            <result property="roleName" column="role_name"/>
+            <result property="roleDetail" column="role_detail"/>
+        </collection>
+
+    </resultMap>
+    <select id="findUserById" resultMap="useMapOne">
+        SELECT * FROM user WHERE id=#{uid};
+    </select>
+    <!--通过id查询用户-->
+    <select id="findUserInfoById" parameterType="int" resultType="UserInfo">
+        SELECT * FROM user_info WHERE id=#{id};
+    </select>
+    <!--通过用户id查询用户的所有订单-->
+    <select id="findOrdersByUID" parameterType="int" resultType="OrderForm">
+        SELECT * FROM order_form WHERE user_id=#{id};
+    </select>
+    <!--通过用户id查询用户所有role-->
+    <select id="findRolesByUserId" resultType="Role">
+        SELECT * FROM role r INNER JOIN user_role ur ON r.role_id=ur.role_id WHERE ur.user_id=#{userId};
+    </select>
+    <!--编写一个删除的方法，目的是测一级缓存的清空-->
+    <select id="deleteUser">
+        DELETE FROM user WHERE id=#{id};
+    </select>
+</mapper>

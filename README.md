@@ -57,3 +57,6 @@ This project is about java advanced knowledge, i add notes of codes, examples an
 
 ### mybatis3
 - mybatis框架的初步使用，配置文件，sql语句
+
+### mybatis4
+- 传统dao的开发方式，dao实现类Impl

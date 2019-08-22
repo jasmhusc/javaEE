@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <!--可以采用注解方式配置过滤器-->
+    <filter>
+        <filter-name>XmlFilter</filter-name>
+        <filter-class>com.hsc.filter.XmlFilter</filter-class>
+        <!--也可以配置初始化参数，可以配置多个参数-->
+        <init-param>
+            <param-name>name</param-name>
+            <param-value>张三</param-value>
+        </init-param>
+    </filter>
+    <!--如果有多个过滤器，在web.xml按照mapping的顺序加载，串行过滤。-->
+    <filter-mapping>
+        <filter-name>XmlFilter</filter-name>
+        <url-pattern>/aa/*</url-pattern>
+    </filter-mapping>
+
+    <!--演示AAFilter和BBFilter的web.xml和注解2中方式的优先级问题
+        这里二者的mapping顺序与原本的自然排序顺序相反:
+        结果BBFilter先拦截，AAFilter后拦截，以此处的配置顺序优先。
+        -->
+    <!--    <filter>-->
+    <!--        <filter-name>BBFilter</filter-name>-->
+    <!--        <filter-class>com.hsc.filter.BBFilter</filter-class>-->
+    <!--    </filter>-->
+    <!--    <filter-mapping>-->
+    <!--        <filter-name>BBFilter</filter-name>-->
+    <!--        <url-pattern>/aabb</url-pattern>-->
+    <!--    </filter-mapping>-->
+
+    <!--    <filter>-->
+    <!--        <filter-name>AAFilter</filter-name>-->
+    <!--        <filter-class>com.hsc.filter.AAFilter</filter-class>-->
+    <!--    </filter>-->
+    <!--    <filter-mapping>-->
+    <!--        <filter-name>AAFilter</filter-name>-->
+    <!--        <url-pattern>/aabb</url-pattern>-->
+    <!--    </filter-mapping>-->
+
+</web-app>

@@ -31,10 +31,18 @@ public class LoginServlet extends HttpServlet {
           */
         // 1. 获取浏览器数据
         request.setCharacterEncoding("utf8");
+        response.setContentType("text/html;charset=utf-8");
         String username = request.getParameter("name");
         String password = request.getParameter("password");
 
         // 2. 执行登录业务逻辑
+        // 先校验验证码是否一致
+        String server_checkCode = (String) request.getSession().getAttribute("Server_CheckCode");
+        String User_CheckCode = request.getParameter("vcode");
+        if (!User_CheckCode.equalsIgnoreCase(server_checkCode)) {
+            response.getWriter().write("<script>alert('验证码错误！')</script>");
+            return;
+        }
         User loginUser = userService.Login(username, password);
         // 将loginUser存储进域对象，传递给SuccessServlet
         request.setAttribute("loginUser",loginUser);
@@ -43,7 +51,8 @@ public class LoginServlet extends HttpServlet {
         if (loginUser == null){
             // 失败跳转到本地的静态资源页面，无需传递数据，用重定向跳转。
             response.setContentType("text/html;charset=utf-8");
-            response.sendRedirect(request.getContextPath() + "/failure.html");
+            //response.sendRedirect(request.getContextPath() + "/failure.html");
+            response.sendRedirect("failure.html");
         }else{
             // 成功，直接跳转到另一个servlet，并写出xxx成功登录，需要传递数据，用请求跳转。
             request.getRequestDispatcher("/SuccessServlet").forward(request,response);

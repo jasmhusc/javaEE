@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -63,7 +64,11 @@ public class CheckCodeServlet extends HttpServlet {
             g.drawString(String.valueOf(c),20+30*i,35);
         }
 
-        // 5. 将图片输出到浏览器
+        // 5.将验证码存储进session
+        HttpSession session = request.getSession();
+        session.setAttribute("Server_CheckCode", checkCode.toString());
+
+        // 6. 将图片输出到浏览器
         try {
             ServletOutputStream out = response.getOutputStream();
             ImageIO.write(image,"png",out);

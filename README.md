@@ -60,3 +60,6 @@ This project is about java advanced knowledge, i add notes of codes, examples an
 
 ### mybatis4
 - 传统dao的开发方式，dao实现类Impl
+
+### mybatis5
+- Annotation注解开发，UserMapper的配置

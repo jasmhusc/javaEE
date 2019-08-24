@@ -63,3 +63,6 @@ This project is about java advanced knowledge, i add notes of codes, examples an
 
 ### mybatis5
 - Annotation注解开发，UserMapper的配置
+
+### mybatis6
+- 动态SQL，if，where，foreach等

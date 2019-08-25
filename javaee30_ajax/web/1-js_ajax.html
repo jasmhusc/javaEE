@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js实现ajax</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<p>
+    用户名:<input type="text" id="username" name="username"><span id="info"></span>
+</p>
+<script type="text/javascript">
+    // js实现异步提交请求，用户名是否存在验证
+    // 1.注册失去焦点事件
+    document.getElementById("username").onblur = function () {
+        // 获取输入框的值
+        var username = this.value;
+        // 验证是否为空，用户没有输入
+        if (username) {
+            // 不为空，进行异步提交请求，验证该用户名是否可用
+            var xmlhttp = new XMLHttpRequest();
+            // 1.设置异步请求回调函数，用于获取服务器返回的数据更新到页面上
+            xmlhttp.onreadystatechange = function () {
+                //获取服务器返回的数据有2个前提：
+                //  1.ajax引擎与服务器通信状态readyState=4, 代表获取服务器响应的数据完成
+                //  2.http协议通信状态码status=200, 代表通信正常
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    //获取服务器返回的数据
+                    document.getElementById("info").innerHTML = ev;
+                }
+            }
+            // 2.初始化请求，设置请求提交数据方法、访问服务器的资源路径，提交的数据
+            //  参数1：设置提交请求数据的方法，get或post
+            //  参数2：访问服务器的资源路径
+            //  参数3：设置是否异步提交请求，true代表异步，并且是默认值，可以省略
+            xmlhttp.open("Get", "CheckUsernameServlet?username=" + username, true);
+            // 3.发送请求
+            xmlhttp.send();
+        }
+    }
+</script>
+</body>
+</html>

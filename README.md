@@ -66,3 +66,6 @@ This project is about java advanced knowledge, i add notes of codes, examples an
 
 ### mybatis6
 - 动态SQL，if，where，foreach等
+
+### mybatis7
+- 配置文件xxxMapper.xml进行一对一，一对多，多对多的多表查询

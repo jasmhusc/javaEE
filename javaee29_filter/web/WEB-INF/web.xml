@@ -23,22 +23,22 @@
         这里二者的mapping顺序与原本的自然排序顺序相反:
         结果BBFilter先拦截，AAFilter后拦截，以此处的配置顺序优先。
         -->
-    <!--    <filter>-->
-    <!--        <filter-name>BBFilter</filter-name>-->
-    <!--        <filter-class>com.hsc.filter.BBFilter</filter-class>-->
-    <!--    </filter>-->
-    <!--    <filter-mapping>-->
-    <!--        <filter-name>BBFilter</filter-name>-->
-    <!--        <url-pattern>/aabb</url-pattern>-->
-    <!--    </filter-mapping>-->
+    <filter>
+        <filter-name>BBFilter</filter-name>
+        <filter-class>com.hsc.filter.BBFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>BBFilter</filter-name>
+        <url-pattern>/aabb</url-pattern>
+    </filter-mapping>
 
-    <!--    <filter>-->
-    <!--        <filter-name>AAFilter</filter-name>-->
-    <!--        <filter-class>com.hsc.filter.AAFilter</filter-class>-->
-    <!--    </filter>-->
-    <!--    <filter-mapping>-->
-    <!--        <filter-name>AAFilter</filter-name>-->
-    <!--        <url-pattern>/aabb</url-pattern>-->
-    <!--    </filter-mapping>-->
+    <filter>
+        <filter-name>AAFilter</filter-name>
+        <filter-class>com.hsc.filter.AAFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AAFilter</filter-name>
+        <url-pattern>/aabb</url-pattern>
+    </filter-mapping>
 
 </web-app>

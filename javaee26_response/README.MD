@@ -53,6 +53,22 @@
     4. Servlet里加载src下的文件（3），直接使用类相对路径：
         Demo.class.getResourceAsStream("/jdbc.propertes")  //第一个/代表src目录WEB-INF/classes
 
+- 总结
+```
+1. '/'代表根目录：
+
+2. src下的文件获取用类路径加载：
+    1.Demo.class.getResourceAsStream("/jdbc.propertes")；
+    2.getServletContext().getResourceAsStream("/WEB-INF/classes/jdbc.propertes");
+    3.this.getClass().getClassLoader(), 不能直接加'/'，可以继续获取Resource或inputstream:
+        this.getClass().getClassLoader().getResource("a.txt");
+        this.getClass().getClassLoader().getResourceAsStream("a.txt");
+    
+3. web下的文件用ServletContext获取：
+      1.String getServletContext().getRealPath(相对路径)；path->inputstream
+      2.InputStream getServletContext().getResourceAsStream(相对路径);
+      3.this.getClass().getClassLoader().getResourceAsStream("../../相对路径");  
+```
 #### 响应行
 
 1. 组成：http协议版本 状态码（200） 状态码描述（ok)

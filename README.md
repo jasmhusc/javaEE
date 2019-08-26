@@ -69,3 +69,6 @@ This project is about java advanced knowledge, i add notes of codes, examples an
 
 ### mybatis7
 - 配置文件xxxMapper.xml进行一对一，一对多，多对多的多表查询
+
+### mybatis8
+- 配置文件设置实现lazyload 延迟加载

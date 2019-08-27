@@ -1,4 +1,7 @@
-package com.hsc.web;
+package com.hsc.jackson;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hsc.entity.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,20 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "CheckUsernameServlet", urlPatterns = "/userexist")
-public class CheckUsernameServlet extends HttpServlet {
+@WebServlet(name = "JacksonServlet", urlPatterns = "/jackson")
+public class JacksonServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // 获取username的数据
-        String username = request.getParameter("username");
-        // 这里只是简单判断用户名是否为：newName
-        if ("newName".equalsIgnoreCase(username))
-            response.getWriter().write("false");
-        else
-            response.getWriter().write("true");
+        // 测试jackson工具，对创建的对象转换为json字符串
+        ObjectMapper objectMapper = new ObjectMapper();
+        String data = objectMapper.writeValueAsString(new User("张三", "123"));
+        response.getWriter().write(data);
     }
 }

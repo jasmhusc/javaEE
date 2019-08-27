@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jq的post异步请求</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<p>
+    用户名:<input type="text" id="username" name="username"/><span id="info"></span>
+</p>
+</body>
+<script type="text/javascript">
+    $("#username").blur(function () {
+        // 获取输入的值
+        var username = $(this).val();
+        if (username) {
+            // 异步请求发送
+            // url，data，callback(isRegestered)，dataType
+            $.post(
+                "userexist",
+                {"username": username},
+                function (isRegestered) {
+                    // 根据返回值，提示不同信息
+                    if ("true" == isRegestered)
+                        $("#info").html("用户名可用！");
+                    else
+                        $("#info").html("用户名已存在！");
+                }
+            );
+        }
+    });
+</script>
+</html>

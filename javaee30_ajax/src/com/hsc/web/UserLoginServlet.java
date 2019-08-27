@@ -7,20 +7,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "CheckUsernameServlet", urlPatterns = "/userexist")
-public class CheckUsernameServlet extends HttpServlet {
+@WebServlet(name = "UserLoginServlet", urlPatterns = "/userlogin")
+public class UserLoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // 获取username的数据
+        // 获取用户名和密码
         String username = request.getParameter("username");
-        // 这里只是简单判断用户名是否为：newName
-        if ("newName".equalsIgnoreCase(username))
-            response.getWriter().write("false");
-        else
-            response.getWriter().write("true");
+        String password = request.getParameter("password");
+
+        // 简单判断
+        if ("admin".equals(username) && "123".equals(password))
+            response.getWriter().write("登录成功！");
+        else {
+            response.getWriter().write("登录失败！");
+//            response.sendRedirect("https://www.baidu.com/"); 没有任何反应
+        }
     }
 }

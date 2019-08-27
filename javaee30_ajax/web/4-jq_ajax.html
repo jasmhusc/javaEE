@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jq的ajax异步请求方式</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<h2>用户登录</h2>
+<form action="login" method="post" id="loginForm">
+    <table>
+        <tr>
+            <td>用户名</td>
+            <td><input type="text" name="username" id="username" placeholder="请输入用户名"/></td>
+        </tr>
+        <tr>
+            <td>密码</td>
+            <td><input type="password" name="password" id="password" placeholder="请输入密码"/></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="button" value="登录" id="btnLogin"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+<script type="text/javascript">
+    $("#btnLogin").click(function () {
+        //获取输入的数据，判断是否为空
+        var username = $("#username").val();
+        var password = $("#password").val();
+        if (username) {
+            // jq的ajax函数，传入的是json数据，包含许多设置，功能更多。
+            // url,async(是否异步，默认true),data,success（成功回调函数）,error（错误处理函数）,method（get或post）,dataType
+            $.ajax({
+                url: "userlogin",
+                async: true,
+                // data:"username="+username+"&password="+password,
+                data: {"username": username, "password": password},
+                dataType: "text",
+                success: function (data) {
+                    // 直接alert
+                    alert(data);
+                },
+                error: function () {
+                    // doNothing
+                }
+            });
+        } else {
+            alert("请输入用户名！")
+        }
+    });
+</script>
+</html>

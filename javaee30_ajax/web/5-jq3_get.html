@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jq3.0的get异步请求方式</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<h2>用户登录</h2>
+<form action="login" method="post" id="loginForm">
+    <table>
+        <tr>
+            <td>用户名</td>
+            <td><input type="text" name="username" id="username" placeholder="请输入用户名"/></td>
+        </tr>
+        <tr>
+            <td>密码</td>
+            <td><input type="password" name="password" id="password" placeholder="请输入密码"/></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="button" value="登录" id="btnLogin"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+<script type="text/javascript">
+    // 不能使用submit，否则就是同步提交请求，刷新页面
+    $("#btnLogin").click(function () {
+        // 获取数据
+        var username = $("#username").val();
+        var password = $("#password").val();
+        // 执行登录
+        $.get({
+            url: "userlogin",
+            data: {username: username, password: password},
+            success: function (data) {
+                alert(data);
+            },
+            dataType: "text"
+        });
+    });
+</script>
+</html>

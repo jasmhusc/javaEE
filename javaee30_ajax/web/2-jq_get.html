@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jq的$.get提交异步请求</title>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<p>
+    用户名:<input type="text" id="username" name="username"/><span id="info"></span>
+</p>
+</body>
+<script type="text/javascript">
+    /*
+            * 语法：
+            *   $.get(url[,data][,callback][,type]);
+            *   参数1：url，设置提交请求的服务器资源路径地址
+            *   参数2：data，提交的请求数据,支持2中提交数据格式：
+            *           格式1：键值对的字符串格式，"key1=value1&key2=value2..."
+            *           格式2：js对象格式（json对象）格式，{key1:value1,key2:value2,...}
+            *   参数3：callback，服务返回数据成功的回调函数
+            *   参数4：type，设置服务返回的数据类型，默认返回文本字符串
+            *       type="text",默认值，返回的文本字符串
+            *       type="html",默认值，返回的文本html代码
+            *       type="scripts",默认值，返回的文本js代码
+            *       type="xml",默认值，返回的文本xml数据
+            *       type="json",默认值，返回的文本json字符串数据，jquery并且将其转换为js对象（json对象）
+            *               json字符串='{"key1":value1,"key2":value2,....}';  json字符串格式规范要求里面的key必须使用双引号括起来
+            *               这里会将其服务器发很好的json字符串转换为json对象={key1:value1,key2:value2,...}
+            *               疑问：返回js对象有什么好处？答：方便解析数据，格式=对象.属性名  获取数据
+            *               例子：var person={username:"张三",age:20}
+            *               获取张三格式，person.username
+            *
+            *   注意：此方法url参数是必须有的，其他参数可有可无
+            * */
+    $("#username").blur(function () {
+        // 获取输入的值
+        // this指的是input，是js对象
+        var username = $(this).val();
+        // 判断输入的值，不为空就异步请求验证，需要将其传递过去
+        if (username) {
+            // get里面直接传递参数：url,data,callback(),dataType
+            // data可以是字符串json或者对象json
+            // callback是成功的回调函数，参数是服务器返回的数据，这里没有失败处理
+            $.get(
+                "userexist",
+                // {"username":username},
+                "username=" + username,
+                function (isused) {
+                    if ("false" === isused) {
+                        $("#info").html("用户名已被注册");
+                    }
+                    if ("true" === isused)
+                        $("#info").html("恭喜你，可以注册");
+                },
+                "text"
+            );
+        }
+    });
+</script>
+</html>

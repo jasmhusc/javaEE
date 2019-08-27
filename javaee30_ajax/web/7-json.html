@@ -1,0 +1,28 @@
+<script type="text/javascript">
+    // 1.json普通数据格式
+    var data1 = {
+        "name": "张三",
+        "age": 26,
+        "job": "clerk"
+    };
+    alert(data1.job);
+
+    // 2.json数组格式
+    var data2 = [
+        {name: "张三", age: 18},
+        {name: "李四", job: "player"},
+        {price: 34.5, number: 18},
+    ];
+    alert(data2[1].job);
+
+    // 3.json复杂格式
+    var data3 = {
+        name: "张三",
+        age: 26,
+        job: "clerk",
+        data: [{name: "张三", age: 18},
+            {name: "李四", job: "player"},
+            {price: 34.5, number: 18}]
+    };
+    alert(data3.data[2].number);
+</script>

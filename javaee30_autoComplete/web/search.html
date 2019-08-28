@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>自动完成</title>
+    <style type="text/css">
+        .content {
+            width: 400px;
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        input[type='text'] {
+            box-sizing: border-box;
+            width: 280px;
+            height: 30px;
+            font-size: 14px;
+            border: 1px solid #38f;
+        }
+
+        input[type='button'] {
+            width: 100px;
+            height: 30px;
+            background: #38f;
+            border: 0;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        #show {
+            box-sizing: border-box;
+            position: relative;
+            left: 8px;
+            font-size: 14px;
+            width: 280px;
+            border: 1px solid dodgerblue;
+            text-align: left;
+            border-top: 0;
+            /*一开始是隐藏不可见*/
+            display: none;
+        }
+
+        #show div {
+            padding: 4px;
+            background-color: white;
+        }
+
+        #show div:hover {
+            /*鼠标移上去背景变色*/
+            background-color: #3388ff;
+            color: white;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div class="content">
+    <img alt="京华亿家" src="img/logo.gif"><br/><br/>
+    <input type="text" name="word" id="word">
+    <input type="button" value="搜索一下">
+    <div id="show">
+        <!--<div>dd</div>-->
+        <!--<div>dd</div>-->
+        <!--<div>dd</div>-->
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        // 绑定按键弹起事件，获取输入的值，提交请求，显示结果
+        $("#word").keyup(function () {
+            // 获取数据
+            var word = $(this).val().trim();
+            if (word.length < 1) return;
+            // 提交异步请求
+            $.post({
+                url: "SerachUserServlet",
+                data: {word: word},
+                success: function (users) {
+                    if (users.length > 0) {
+                        // 显示数据
+                        // 1.定义字符串
+                        var html = "";
+                        $(users).each(function (i, user) {
+                            // 2.循环拼接
+                            html += '<div>' + user.name + '</div>';
+                        });
+                        // 3.将字符串添加到显示位置
+                        $("#show").html(html).show();
+                    } else {
+                        $("#show").hide();
+                    }
+                },
+                dataType: "json",
+                error: function () {
+                    alert("服务器繁忙...")
+                }
+            });
+        });
+
+        // 绑定点击事件，选中后，将搜索框的值设置为该值，搜索框隐藏
+        // 由于子div是动态创建的，用on绑定
+        $("#show").on("click", "div", function () {
+            var word = $(this).text();
+            $("#word").val(word);
+            $("#show").hide();
+        })
+    });
+</script>
+</body>
+</html>

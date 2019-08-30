@@ -11,7 +11,7 @@ public interface UserMapper {
     /**
      * 根据id查询用户
      */
-    User findUserById(Integer id);
+    User findUserById(int id);
 
     /**
      * 查询所有用户

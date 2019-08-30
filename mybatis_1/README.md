@@ -73,8 +73,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 2.  实例化会话工厂创建类 SqlSessionFactoryBuilder
 3.  通过会话工厂创建类，读取上面的输入流，得到会话工厂 SqlSessionFactory 类
 4.  使用 SqlSessionFactory 对象，创建 SqlSession 对象
-a)  它相当于 JDBC 中的 Connection 对象，提供了操作数据库的 CRUD 方法
-b)  它提供了一个 getMapper()方法，获取接口的实现对象。
+    a)  它相当于 JDBC 中的 Connection 对象，提供了操作数据库的 CRUD 方法
+    b)  它提供了一个 getMapper()方法，获取接口的实现对象。
 5.  获取接口的对象 UserMapper
 6.  执行数据库的查询操作，输出用户信息
 7.  关闭会话，释放资源。

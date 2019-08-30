@@ -1,11 +1,10 @@
-package com.hsc.mybatis;
+﻿package com.hsc.mybatis;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.hsc.entity.Configuration;
 import com.hsc.entity.Mapper;
 import com.hsc.entity.User;
 import com.hsc.utils.SourceCloseUtils;
-
 import javax.sql.DataSource;
 import java.lang.reflect.*;
 import java.sql.*;

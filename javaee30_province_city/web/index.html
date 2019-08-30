@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>省市级联</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<select id="province">
+    <option>==请选择省份==</option>
+</select>
+<select id="city">
+    <option>==请选择城市==</option>
+</select>
+
+<script type="text/javascript">
+
+    $(function () {
+        // 省从pid=0的获取
+        $.get({
+            url: "AreaServlet",
+            data: "pid=0",
+            dataType: "json",
+            success: function (provinces) {
+                var html = "<option>==请选择省份==</option>";
+                $(provinces).each(function (i, province) {
+                    // 由于下面的市市根据省获取，这里应该带上省的id信息
+                    html += '<option value=' + province.id + '>' + province.name + '</option>';
+                });
+                $("#province").html(html);
+            }
+        });
+
+        // 市根据省的变化获取，chang事件
+        $("#province").change(function () {
+            // 获取选中的省份的id
+            var cid = $(this).val();
+            $.post({
+                url: "AreaServlet",
+                data: {pid: cid},
+                dataType: "json",
+                success: function (cities) {
+                    // 如果用append()，在每次事件内，均要清除之前的数据
+                    html = '<option>==请选择城市==</option>';
+                    $(cities).each(function (i, city) {
+                        html += '<option>' + city.name + '</option>';
+                    });
+                    $("#city").html(html);
+                }
+            });
+        })
+    });
+</script>
+</body>
+</html>
